@@ -58,7 +58,7 @@ button, input {
 
 .flex-col {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
 .flex-row {
@@ -126,7 +126,7 @@ button, input {
     justify-content: space-between;
     gap: 12px;
     border-bottom: $border;
-    padding: 12px 16px;
+    padding: 16px 16px 12px;
     transition: all .2s ease;
     cursor: pointer;
 
@@ -278,11 +278,6 @@ button, input {
         transition: all .2s ease;
         padding: 16px;
         border-radius: 12px;
-
-        .show-more {
-            font-size: 16px;
-            color: $blue;
-        }
 
         &:hover {
             background: $dark2;
@@ -551,6 +546,7 @@ button, input {
 
                         p {
                             font-size: 14px;
+                            color: #fff;
                         }
 
                         .dot {
@@ -569,6 +565,82 @@ button, input {
                     border-radius: 0;
                 }
             }
+        }
+
+        .lists-page {
+            
+            .lists-main {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+                border-bottom: $border;
+
+                h3 {
+                    padding: 16px 16px 0;
+                }
+
+                .fixed-lists-title {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    padding: 0 16px;
+
+                    h3 {
+                        padding: 0;
+                    }
+
+                    button {
+                        color: $blue;
+                        font-size: 15px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        padding: 3px 12px;
+                        border-radius: 12px;
+
+                        &:hover {
+                            background: rgba($color: $blue, $alpha: 0.2);
+                        }
+                    }
+                }
+
+                .fixed-lists-row {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    justify-content: space-between;
+
+                    .fixed-list {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 6px;
+                        flex: 1;
+                        padding: 12px 16px;
+
+                        img {
+                            border-radius: 12px;
+                            object-fit: cover;
+                        }
+
+                        span {
+                            font-size: 14px;
+                        }
+
+                        &:hover {
+                            background: rgb(14, 14, 14);
+                        }
+                    }
+                }
+            }
+
+            .explore-lists {
+                .show-more {
+                    padding: 16px;
+                }
+            }
+
         }
     }
 
@@ -676,4 +748,92 @@ button, input {
     .page-description-content {
         padding: 32px;
     }
+}
+
+
+.two-left-one-right-schema {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .2s ease;
+    padding: 16px;
+
+    .show-more {
+        font-size: 16px;
+        color: $blue;
+    }
+
+    &:hover {
+        background: rgb(14, 14, 14);
+    }
+
+    .schema-item-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+
+        img {
+            border-radius: 16px;
+            object-fit: cover;
+        }
+
+        p {
+            color: $darkGray;
+            font-size: 15px;
+        }
+
+        .count {
+            font-size: 13px;
+        }
+
+        span {
+            font-weight: 600;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .user-details {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            span, p {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .box-item-details.flex-row {
+        align-items: center;
+        gap: 12px;
+    }
+
+    .follow-btn {
+        text-align: center;
+        background: #fff;
+        color: $dark;
+        font-weight: 600;
+        padding: 6px 16px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all .2s ease;
+
+        &:hover {
+            opacity: .9;
+        }
+    }
+
+    .box-more-btn svg.pinned {
+        color: $blue;
+    }
+
+}
+
+.show-more {
+    font-size: 16px;
+    color: $blue;
 }

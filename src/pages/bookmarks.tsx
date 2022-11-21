@@ -4,7 +4,7 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 import Post from 'components/Post'
 import data from '../lib/data.json'
 
-const Home: NextPage = () => {
+const Bookmarks: NextPage = () => {
 
   return (
    <Layout>
@@ -32,4 +32,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Bookmarks
