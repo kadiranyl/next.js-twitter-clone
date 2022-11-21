@@ -73,8 +73,8 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends}: an
           <div className={"side-box" + (showSearch ? " mt" : "")}>
             <h2>İlgini çekebilecek gündemler</h2>
             
-            {agendas.map((agenda: any) => (
-              <Agenda agenda={agenda} />
+            {agendas.map((agenda: any, index) => (
+              <Agenda agenda={agenda} key={index} />
             ))}
 
             <Link href="/" className="side-box-item">
