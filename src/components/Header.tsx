@@ -48,7 +48,7 @@ export default function Header() {
           </Link>
           <Link href="/bookmarks" className={router.pathname === "/bookmarks" ? 'active' : ''}>
             {router.pathname === "/bookmarks" ? (
-              <HiDocumentText size={28} />
+              <HiBookmark size={28} />
             ) : (
               <HiOutlineBookmark size={28} />
             )}
