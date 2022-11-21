@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { HiDotsHorizontal, HiOutlineChatAlt2, HiRefresh, HiOutlineRefresh, HiHeart, HiOutlineHeart, HiOutlineShare, HiChatAlt2 } from 'react-icons/hi'
 
-export default function Post({post}: any) {
+export default function Post({post, index}: any) {
     console.log(post);
     
   return (
-    <div className="post">
+    <div className="post" key={index}>
         <Link href="/">
         <Image src="/images/user.jpeg" width={36} height={36} alt="kadir" className='rounded' />
         </Link>

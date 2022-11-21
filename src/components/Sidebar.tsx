@@ -2,131 +2,80 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiSearch, HiDotsHorizontal } from 'react-icons/hi'
 import { useStickyBox } from "react-sticky-box";
+import Agenda from './Agenda';
+import Search from './Search';
 
-export default function Sidebar() {
+export default function Sidebar({showSearch, showTags, showFollowRecommends}: any) {
+  const agendas = [
+    {
+      location: "Amerika",
+      name: "#Elections",
+      tweet_count: 512000,
+    },
+    {
+      location: "Türkiye",
+      name: "#ABD_Seçimleri",
+      tweet_count: 50000,
+    },
+    {
+      location: "Amerika",
+      name: "#Elections",
+      tweet_count: 512000,
+    },
+    {
+      location: "Türkiye",
+      name: "#ABD_Seçimleri",
+      tweet_count: 50000,
+    },
+    {
+      location: "Amerika",
+      name: "#Elections",
+      tweet_count: 512000,
+    },  
+    {
+      location: "Amerika",
+      name: "#Elections",
+      tweet_count: 512000,
+    },
+    {
+      location: "Türkiye",
+      name: "#ABD_Seçimleri",
+      tweet_count: 50000,
+    },
+    {
+      location: "Amerika",
+      name: "#Elections",
+      tweet_count: 512000,
+    },
+    {
+      location: "Türkiye",
+      name: "#ABD_Seçimleri",
+      tweet_count: 50000,
+    },
+    {
+      location: "Amerika",
+      name: "#Elections",
+      tweet_count: 512000,
+    },
+  ]
+
   const stickyRef = useStickyBox({offsetTop: 20, offsetBottom: 20})
 
   return (
     <aside>
       <div className="sidebar" ref={stickyRef}>
-        <div className="search">
-          <HiSearch size={20} />
-          <input type="text" placeholder="Twitter'da Ara" />
-        </div>
+        {showSearch && (
+         <Search />
+        )}
 
         <div className="sidebar-main">
-          <div className="side-box">
+          {showTags && (
+          <div className={"side-box" + (showSearch ? " mt" : "")}>
             <h2>İlgini çekebilecek gündemler</h2>
             
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details">
-                <p>Amerika konumunda gündemde</p>
-                <span>#Elections</span>
-                <p className='count'>512 B Tweet</p>
-              </div>
-              <button className='box-more-btn rounded'>
-                <HiDotsHorizontal size={16} />
-              </button>
-            </Link>
+            {agendas.map((agenda: any) => (
+              <Agenda agenda={agenda} />
+            ))}
 
             <Link href="/" className="side-box-item">
               <span className="show-more">
@@ -135,8 +84,10 @@ export default function Sidebar() {
             </Link>
 
           </div>
+          )}
 
-          <div className="side-box">
+          {showFollowRecommends && (
+          <div className={"side-box" + (showTags ? " mt" : "")}>
             <h2>Kimi takip etmeli</h2>
             
             <Link href="/" className="side-box-item">
@@ -185,6 +136,7 @@ export default function Sidebar() {
             </Link>
 
           </div>
+          )}
         </div>
       </div>
     </aside>
