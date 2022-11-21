@@ -29,6 +29,23 @@ a {
     text-decoration: none;
 }
 
+h2 {
+    font-size: 32px;
+}
+p {
+    color: $darkGray;
+
+    a {
+        color: #fff;
+        text-decoration: underline;
+        font-weight: 600;
+
+        &:hover {
+        text-decoration: underline 2px;
+    }
+}
+}
+
 button, input {
     outline: none;
     border: none;
@@ -433,6 +450,57 @@ button, input {
                     background: rgba($color: #fff, $alpha: 0.2);
                 }
             }
+
+            .tabs {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 16px 0;
+                    flex: 1;
+                    transition: all .2s ease;
+                    color: $darkGray;
+
+                    &:hover {
+                        background: $dark2;
+                    }
+                }
+                a.active {
+                    color: #fff;
+                    font-weight: 600;
+                    position: relative;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        width: 30%;
+                        height: 4px;
+                        border-radius: 6px;
+                        background: $blue;
+                    }
+                }
+            }
+        }
+
+        .notifications-title {
+            display: flex;
+            flex-direction: column;
+            border-bottom: $border;
+            padding: 0;
+
+            .title-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 20px 16px 6px;
+            }
         }
 
         .explore-title {
@@ -532,5 +600,76 @@ button, input {
                 }
             }
         }
+    }
+}
+
+
+.notification-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: $border;
+
+    .notification-main {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+    }
+
+    svg {
+        width: 32px;
+    }
+
+    .notification-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        img {
+            margin-bottom: 6px;
+        }
+
+        span {
+            color: $darkGray;
+            font-size: 14px;
+        }
+    }
+
+    &:hover {
+        background: rgb(14, 14, 14);
+    }
+}
+
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin-top: 48px;
+    
+    .content {
+        width: 336px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+.page-description {
+    display: flex;
+    flex-direction: column;
+    border-bottom: $border;
+
+    img {
+        width: 100% !important;
+        object-fit: cover;
+    }
+
+    .page-description-content {
+        padding: 32px;
     }
 }

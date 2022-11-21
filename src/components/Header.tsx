@@ -30,8 +30,8 @@ export default function Header() {
             )}
             <span>Keşfet</span>
           </Link>
-          <Link href="/notifications" className={router.pathname === "/notifications" ? 'active' : ''}>
-            {router.pathname === "/notifications" ? (
+          <Link href="/notifications" className={router.pathname.includes("/notifications") ? 'active' : ''}>
+            {router.pathname.includes("/notifications") ? (
               <HiBell size={28} />
             ) : (
               <HiOutlineBell size={28} />
