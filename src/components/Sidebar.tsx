@@ -128,6 +128,12 @@ export default function Sidebar() {
               </button>
             </Link>
 
+            <Link href="/" className="side-box-item">
+              <span className="show-more">
+                Daha fazla göster
+              </span>
+            </Link>
+
           </div>
 
           <div className="side-box">
@@ -170,6 +176,12 @@ export default function Sidebar() {
               <button className='follow-btn'>
                 Takip et
               </button>
+            </Link>
+
+            <Link href="/" className="side-box-item">
+              <span className="show-more">
+                Daha fazla göster
+              </span>
             </Link>
 
           </div>
