@@ -62,8 +62,8 @@ export default function Header() {
             )}
             <span>Listeler</span>
           </Link>
-          <Link href="/profile" className={router.pathname === "/profile" ? 'active' : ''}>
-            {router.pathname === "/profile" ? (
+          <Link href="/profile" className={router.pathname.includes("/profile") ? 'active' : ''}>
+            {router.pathname.includes("/profile") ? (
               <HiUser size={28} />
             ) : (
               <HiOutlineUser size={28} />

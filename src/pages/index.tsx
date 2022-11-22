@@ -15,15 +15,9 @@ const Home: NextPage = () => {
         </button>
       </div>
       <div className="home-flow">
-    
         {data.posts.map((post, index) => (
           <Post post={post} key={index} />
         ))}
-
-        
-
-
-
       </div>
    </Layout>
   )

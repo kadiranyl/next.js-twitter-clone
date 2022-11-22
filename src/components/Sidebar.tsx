@@ -5,7 +5,7 @@ import { useStickyBox } from "react-sticky-box";
 import Agenda from './Agenda';
 import Search from './Search';
 
-export default function Sidebar({showSearch, showTags, showFollowRecommends}: any) {
+export default function Sidebar({showSearch, showTags, showFollowRecommends, showMedia}: any) {
   const agendas = [
     {
       location: "Amerika",
@@ -59,7 +59,7 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends}: an
     },
   ]
 
-  const stickyRef = useStickyBox({offsetTop: 20, offsetBottom: 20})
+  const stickyRef = useStickyBox()
 
   return (
     <aside>
@@ -68,9 +68,32 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends}: an
          <Search />
         )}
 
+        {showMedia && (
+          <div className={"sidebar-medias" + (showSearch || showMedia ? " mt" : "")}>
+            <Link href="">
+              <Image src="/images/user.jpeg" width={114} height={96} alt="" />
+            </Link>
+            <Link href="">
+              <Image src="/images/user.jpeg" width={114} height={96} alt="" />
+            </Link>
+            <Link href="">
+              <Image src="/images/user.jpeg" width={114} height={96} alt="" />
+            </Link>
+            <Link href="">
+              <Image src="/images/user.jpeg" width={114} height={96} alt="" />
+            </Link>
+            <Link href="">
+              <Image src="/images/user.jpeg" width={114} height={96} alt="" />
+            </Link>
+            <Link href="">
+              <Image src="/images/user.jpeg" width={114} height={96} alt="" />
+            </Link>
+          </div>
+        )}
+
         <div className="sidebar-main">
           {showTags && (
-          <div className={"side-box" + (showSearch ? " mt" : "")}>
+          <div className={"side-box" + (showSearch || showMedia ? " mt" : "")}>
             <h2>İlgini çekebilecek gündemler</h2>
             
             {agendas.map((agenda: any, index) => (
@@ -98,7 +121,7 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends}: an
                   <p>@kadiran</p>
                 </div>
               </div>
-              <button className='follow-btn'>
+              <button className='small-btn'>
                 Takip et
               </button>
             </Link>
@@ -111,7 +134,7 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends}: an
                   <p>@kadiran</p>
                 </div>
               </div>
-              <button className='follow-btn'>
+              <button className='small-btn'>
                 Takip et
               </button>
             </Link>
@@ -124,7 +147,7 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends}: an
                   <p>@kadiran</p>
                 </div>
               </div>
-              <button className='follow-btn'>
+              <button className='small-btn'>
                 Takip et
               </button>
             </Link>

@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-export default function Layout({ children, showSearch=true, showTags=true, showFollowRecommends=true, showSidebar=true }: any) {
+export default function Layout({ children, showSearch=true, showTags=true, showFollowRecommends=true, showSidebar=true, showMedia=false }: any) {
   return (
     <div className='layout container'>
         <Header />
@@ -9,7 +9,7 @@ export default function Layout({ children, showSearch=true, showTags=true, showF
             {children}
         </main>
         {showSidebar && (
-        <Sidebar showSearch={showSearch} showTags={showTags} showFollowRecommends={showFollowRecommends} />
+        <Sidebar showSearch={showSearch} showTags={showTags} showFollowRecommends={showFollowRecommends} showMedia={showMedia} />
         )}
     </div>
   )

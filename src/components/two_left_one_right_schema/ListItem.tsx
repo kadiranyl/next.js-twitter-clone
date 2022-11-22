@@ -25,7 +25,7 @@ export default function ListItem({ image, name, user, pinned=null }: any) {
                 )}
             </button>
         ) : (
-        <button className='follow-btn'>
+        <button className='small-btn'>
         Takip et
         </button>
         )}
