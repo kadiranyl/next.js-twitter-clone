@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { HiSearch, HiDotsHorizontal } from 'react-icons/hi'
 import { useStickyBox } from "react-sticky-box";
 import Agenda from './Agenda';
 import Search from './Search';

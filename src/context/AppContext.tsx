@@ -17,8 +17,10 @@ export const AppContextProvider = ({ children }: any) => {
         if (!localStorage.getItem("theme")) {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 localStorage.setItem("theme", "3")
+                setTheme(3)
             } else {
                 localStorage.setItem("theme", "1")
+                setTheme(1)
             }
         } else {
             setTheme(localStorage.getItem("theme"))
@@ -42,12 +44,16 @@ export const AppContextProvider = ({ children }: any) => {
     setThemeColor(e)
   }
 
-  useEffect(() => {    
-    document.body.className = 'theme-' + (theme == "1" ? "light" : theme == "2" ? "loess" : theme == "3" && "dark") + ' theme-' + themeColor
-  }, [theme, themeColor]);
+  useEffect(() => {
+
+    const html: any = document.querySelector("html")
+
+    html.className = 'theme-' + (theme == "1" ? "light" : theme == "2" ? "loess" : theme == "3" && "dark") + ' theme-' + themeColor
+
+}, [theme, themeColor]);
 
   return (
-    <AppContext.Provider value={{ theme, changeTheme, changeThemeColor }}>
+    <AppContext.Provider value={{ theme, changeTheme, themeColor, changeThemeColor }}>
       {children}
     </AppContext.Provider>
   )
