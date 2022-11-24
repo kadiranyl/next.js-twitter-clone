@@ -1,15 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import 'themes.scss';
 
-$blue: rgb(29, 155, 240);
-$darkBlue: rgb(26, 140, 216);
-$darkGray: rgb(113, 118, 123);
-$lightGray: rgb(231, 233, 234);
-$dark: #2b2b2b;
-$dark2: rgb(32, 35, 39);
-$red: rgb(249, 24, 128);
-$green: rgb(0, 186, 124);
+@mixin themify($themes: $themes) {
+    @each $theme, $map in $themes {
+  
+      .theme-#{$theme} & {
+        $theme-map: () !global;
+        @each $key, $submap in $map {
+          $value: map-get(map-get($themes, $theme), '#{$key}');
+          $theme-map: map-merge($theme-map, ($key: $value)) !global;
+        }
+  
+        @content;
+        $theme-map: null !global;
+      }
+  
+    }
+  }
 
-$border: 1px solid $dark;
+  @function themed($key) {
+    @return map-get($theme-map, $key);
+  }
+
+
+$primary: rgb(29, 155, 240);
+$secondary: rgb(26, 140, 216);
+
+$yellow: #FFD400;
+$red: #F91880;
+$purple: #7856FF;
+$orange: #FF7A00;
+$green: #00BA7C;
 
 
 * {
@@ -20,13 +41,31 @@ $border: 1px solid $dark;
 }
 
 body {
-    background: #000;
-    color: #fff;
     overflow-y: scroll;
 }
 
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+::-webkit-scrollbar-thumb {
+    @include themify($themes) {
+        background: themed('blackOne');
+    }
+}
+
+#__next {
+    @include themify($themes) {
+        color: themed('textColor');  
+        background-color: themed('backgroundColor');  
+    }
+}
+
 a {
-    color: #fff;
+    color: white;
+    @include themify($themes) {
+        color: themed('textColor');
+    }
     text-decoration: none;
 }
 
@@ -34,8 +73,12 @@ h2 {
     font-size: 32px;
     line-height: 36px;
 }
+
+
 p {
-    color: $darkGray;
+    @include themify($themes) {
+        color: themed('grayD');
+    }
 
     a {
         color: #fff;
@@ -54,6 +97,58 @@ button, input {
     background: none;
 }
 
+input[type="radio"], input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.checkmark {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 99px;
+    color: #fff;
+    @include themify($themes) {
+        border: 1px solid themed('textColor');
+    }
+
+    svg {
+        display: none;
+        z-index: 2;
+    }
+
+    &::before {
+        content: "";
+        background: rgba(29, 155, 240, 0.1);
+        opacity: 0;
+        transition: all .2s ease;
+        width: 36px;
+        height: 36px;
+        border-radius: 99px;
+        position: absolute;
+    }
+}
+
+.checkbox-label:has(input:checked) .checkmark {
+    background: $primary;
+    border-color: $primary !important;
+
+    svg {
+        display: block;
+    }
+}
+
 .rounded {
     border-radius: 99px !important;
 }
@@ -68,6 +163,10 @@ button, input {
     flex-direction: row !important;
 }
 
+.space-between {
+    justify-content: space-between !important;
+}
+
 .btn {
     padding: 12px;
     width: 100%;
@@ -78,19 +177,21 @@ button, input {
 }
 
 .blue-btn {
-    background: $blue;
+    background: $primary;
     color: #fff;
     transition: all .2s ease;
 
     &:hover {
-        background: $darkBlue;
+        background: $secondary;
     }
 }
 
 .small-btn {
     text-align: center;
-    background: #fff;
-    color: $dark;
+    @include themify($themes) {
+        background: themed('grayL');
+        color: themed('backgroundColor');
+    }
     font-weight: 600;
     padding: 6px 16px;
     border-radius: 16px;
@@ -122,7 +223,9 @@ button, input {
     cursor: pointer;
 
     svg {
-        color: $darkGray;
+        @include themify($themes) {
+            color: themed('grayD');  
+        }
         transition: all .2s ease;
     }
 
@@ -130,7 +233,7 @@ button, input {
         background: rgba(29, 155, 240, 0.2);
 
         svg {
-            color: $blue;
+            color: $primary;
         }
     }
 }
@@ -143,7 +246,9 @@ button, input {
 .dot {
     width: 4px;
     height: 4px;
-    background: $darkGray;
+    @include themify($themes) {
+        background: themed('grayD');  
+    }
     border-radius: 99px;
 }
 
@@ -152,13 +257,17 @@ button, input {
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    border-bottom: $border;
+    @include themify($themes) {
+        border-bottom: themed('border');
+    }
     padding: 16px 16px 12px;
     transition: all .2s ease;
     cursor: pointer;
 
     &:hover {
-        background: rgb(14, 14, 14);
+        @include themify($themes) {
+            background: themed('boxHover');  
+        }
     }
 
     .flex-col {
@@ -178,7 +287,9 @@ button, input {
                 gap: 6px;
 
                 p {
-                    color: $darkGray;
+                    @include themify($themes) {
+                        color: themed('grayD');  
+                    }
                     font-size: 15px;
                 }
 
@@ -197,7 +308,9 @@ button, input {
         }
 
         .content * {
-            color: $lightGray;
+            @include themify($themes) {
+                color: themed('grayL');  
+            }
             font-size: 15px;
         }
 
@@ -217,20 +330,24 @@ button, input {
                 transition: all .2s ease;
 
                 svg {
-                    color: $darkGray;
+                    @include themify($themes) {
+                        color: themed('grayD');
+                    }
                     transition: all .2s ease;
                 }
 
                 span {
-                    color: $darkGray;
+                    @include themify($themes) {
+                        color: themed('grayD');  
+                    }
                     transition: all .2s ease;
                 }
             }
             .action-item.blue:hover {
-                background: rgba($color: $blue, $alpha: 0.2);
+                background: rgba($color: $primary, $alpha: 0.2);
 
                 svg, span {
-                    color: $blue;
+                    color: $primary;
                 }
             }
 
@@ -254,7 +371,9 @@ button, input {
 }
 
 .search {
-    background: $dark2;
+    @include themify($themes) {
+        background: themed('blackTwo');  
+    }
     display: flex;
     align-items: center;
     width: 100%;
@@ -264,7 +383,9 @@ button, input {
     svg {
         position: absolute;
         left: 18px;
-        color: $darkGray;
+        @include themify($themes) {
+        color: themed('grayD');  
+    }
     }
 
     input {
@@ -275,11 +396,13 @@ button, input {
         color: #fff;
 
         &::placeholder {
-            color: $darkGray;
+            @include themify($themes) {
+        color: themed('grayD');  
+    }
         }
 
         &:focus {
-            outline: 1px solid $blue;
+            outline: 1px solid $primary;
             border-radius: 24px;
         }
     }
@@ -307,7 +430,9 @@ button, input {
         border-radius: 12px;
 
         &:hover {
-            background: $dark2;
+            @include themify($themes) {
+                background: themed('blackTwo');  
+            }
         }
 
         .box-item-details {
@@ -316,7 +441,9 @@ button, input {
             align-items: flex-start;
 
             p {
-                color: $darkGray;
+                @include themify($themes) {
+        color: themed('grayD');  
+    }
                 font-size: 15px;
             }
 
@@ -348,7 +475,9 @@ button, input {
     header {
         height: 100vh;
         display: flex;
-        border-right: $border;
+        @include themify($themes) {
+            border-right: themed('border');
+        }
         justify-content: space-between;
         flex-direction: column;
         padding: 20px 12px;
@@ -356,6 +485,12 @@ button, input {
         position: sticky;
         top: 0;
         left: 0;
+
+        .logo svg {
+            @include themify($themes) {
+                color: themed('logo');
+            }
+        }
 
         nav.nav-links {
             display: flex;
@@ -375,7 +510,9 @@ button, input {
                     font-size: 18px;
                 }
                 &:hover {
-                    background: $dark;
+                    @include themify($themes) {
+                        background: themed('blackOne');
+                    }
                 }
             }
             a.active span {
@@ -403,20 +540,28 @@ button, input {
                     span {
                         font-size: 15px;
                         font-weight: 600;
-                        color: $lightGray;
+                        @include themify($themes) {
+                            color: themed('grayL');
+                        }
                     }
                     p {
-                        color: $darkGray;
+                        @include themify($themes) {
+                            color: themed('grayD');
+                        }
                         font-size: 15px;
                     }
                 }
             }
             svg {
-                color: $lightGray;
+                @include themify($themes) {
+                    color: themed('grayL');  
+                }
             }
 
             &:hover {
-                background: $dark;
+                @include themify($themes) {
+                    background: themed('blackOne');
+                }
             }
         }
     }
@@ -430,6 +575,7 @@ button, input {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-top: 14px;
             padding: 6px 16px;
             position: sticky;
             top: 0;
@@ -445,7 +591,9 @@ button, input {
             }
 
             svg {
-                color: $lightGray;
+                @include themify($themes) {
+                    color: themed('grayL');  
+                }
             }
 
             button {
@@ -458,15 +606,24 @@ button, input {
                 transition: all .2s ease;
 
                 &:hover {
-                    background: rgba($color: #fff, $alpha: 0.2);
+                    @include themify($themes) {
+                        background: themed('roundedButtonHover');
+                    }
                 }
+            }
+
+            .has-back {
+                align-items: center;
+                gap: 20px;
             }
         }
 
         .notifications-title {
             display: flex;
             flex-direction: column;
-            border-bottom: $border;
+            @include themify($themes) {
+                border-bottom: themed('border');
+            }
             padding: 0;
 
             .title-top {
@@ -487,7 +644,9 @@ button, input {
             .latest-new {
                 width: 100%;
                 height: 340px;
-                border-bottom: $border;
+                @include themify($themes) {
+                    border-bottom: themed('border');
+                }
                 position: relative;
                 margin-top: 6px;
 
@@ -532,12 +691,18 @@ button, input {
                             background: #fff;
                         }
                     }
+
+                    h2 {
+                        color: #fff;
+                    }
                 }
             }
 
             .side-box {
                 border-radius: 0;
-                border-bottom: $border;
+                @include themify($themes) {
+                    border-bottom: themed('border');
+                }
                 padding-top: 12px;
 
                 .side-box-item {
@@ -553,7 +718,9 @@ button, input {
                 flex-direction: column;
                 width: 100%;
                 gap: 12px;
-                border-bottom: $border;
+                @include themify($themes) {
+                    border-bottom: themed('border');
+                }
 
                 h3 {
                     padding: 16px 16px 0;
@@ -571,7 +738,7 @@ button, input {
                     }
 
                     button {
-                        color: $blue;
+                        color: $primary;
                         font-size: 15px;
                         font-weight: 600;
                         cursor: pointer;
@@ -579,7 +746,7 @@ button, input {
                         border-radius: 12px;
 
                         &:hover {
-                            background: rgba($color: $blue, $alpha: 0.2);
+                            background: rgba($color: $primary, $alpha: 0.2);
                         }
                     }
                 }
@@ -608,7 +775,9 @@ button, input {
                         }
 
                         &:hover {
-                            background: rgb(14, 14, 14);
+                            @include themify($themes) {
+            background: themed('boxHover');  
+        }
                         }
                     }
                 }
@@ -622,80 +791,205 @@ button, input {
 
         }
 
-        .notifications-page {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            height: 100vh;
+        
+    }
 
-            .messages-section {
-                flex: 1;
-                border-right: $border;
-                height: 100%;
+    .two-diveded-page {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 100vh;
 
-                .messages-search {
-                    padding: 12px 16px;
+        .diveded-left {
+            flex: 1;
+            @include themify($themes) {
+                border-right: themed('border');
+            }
+            height: 100%;
+            overflow-y: scroll;
 
-                    .search {
-                        background: none;
-                        border: 1px solid rgba($color: #fff, $alpha: 0.2);
-                    }
-                }
+            .diveded-search {
+                padding: 12px 16px;
 
-
-                .two-left-one-right-schema {
-                    border-radius: 0;
-
-                    .box-more-btn  {
-                        opacity: 0;
-                        transition: all .2s ease;
-                    }
-
-                    &:hover .box-more-btn  {
-                        opacity: 100;
-                    }
-                }
-
-                .two-left-one-right-schema.active {
-                    position: relative;
-
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        right: 0;
-                        height: 100%;
-                        width: 2px;
-                        background: $blue;
+                .search {
+                    background: none;
+                    @include themify($themes) {
+                        border: 1px solid themed('blackTwo');
                     }
                 }
             }
+        }
 
-            .chat-section {
-                flex: 1.5;
+        .diveded-left-messages {
+            .two-left-one-right-schema {
+                border-radius: 0;
 
-                .select-message {
-                    display: flex;
-                    flex-direction: column;
+                .box-more-btn  {
+                    opacity: 0;
+                    transition: all .2s ease;
+                }
+
+                &:hover .box-more-btn  {
+                    opacity: 100;
+                }
+            }
+
+            .two-left-one-right-schema.active {
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    right: 0;
                     height: 100%;
-                    justify-content: center;
-                    gap: 6px;
-                    width: 350px;
-                    margin: 0 auto;
+                    width: 2px;
+                    background: $primary;
+                }
+            }
+        }
 
-                    .btn {
-                        margin-top: 16px;
-                        width: fit-content;
-                        padding-right: 36px;
-                        padding-left: 36px;
+        .diveded-right {
+            flex: 1.5;
+            @include themify($themes) {
+                border-right: themed('border');
+            }
+
+            .select-message {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                justify-content: center;
+                gap: 6px;
+                width: 350px;
+                margin: 0 auto;
+
+                .btn {
+                    margin-top: 16px;
+                    width: fit-content;
+                    padding-right: 36px;
+                    padding-left: 36px;
+                }
+            }
+
+            .item p.top-desc {
+                padding: 6px 16px;
+                font-size: 14px;
+            }
+            
+
+            .display-item {
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                @include themify($themes) {
+                    border-top: themed('border');
+                }
+                gap: 18px;
+
+                &:nth-of-type(3) {
+                    border: none !important;
+                }
+
+                .display-item-row {
+                    justify-content: space-around;
+                    gap: 10px;
+
+                    button, .theme-item {
+                        cursor: pointer;
+                    }
+
+                    .color-item {
+                        width: 42px;
+                        height: 42px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .color-item.blue {
+                        background: $primary;
+                    }
+                    .color-item.yellow {
+                        background: $yellow;
+                    }
+                    .color-item.red {
+                        background: $red;
+                    }
+                    .color-item.purple {
+                        background: $purple;
+                    }
+                    .color-item.orange {
+                        background: $orange;
+                    }
+                    .color-item.green {
+                        background: $green;
+                    }
+
+
+
+                    .theme-item {
+                        flex: 1;
+                        padding: 18px;
+                        border-radius: 3px;
+                        display: flex;
+                        align-content: center;
+                        justify-content: space-between;
+
+                        p {
+                            flex: 1;
+                            text-align: center;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+
+                        &:hover .checkmark::before {
+                            opacity: 1;
+                        }
+                    }
+                    .theme-item:has(input:checked) {
+                        outline: 2px solid $primary;
+                    }
+
+                    .theme-item.light {
+                        background: white;
+                        p {
+                            color: black;
+                        }
+
+                        .checkmark {
+                            border-color: #536471;
+                        }
+                    }
+                    .theme-item.loess {
+                        background: #15202B;
+
+                        .checkmark {
+                            border-color: #8b98a5;
+                        }
+                    }
+                    .theme-item.dark {
+                        background: #000;
+
+                        .checkmark {
+                            border-color: #71767b;
+                        }
                     }
                 }
             }
         }
     }
 
+    .settings-page {
+        .two-left-one-right-schema {
+            padding: 10px 16px;
+        }
+    }
+
     aside {
         width: 370px;
-        border-left: $border;
+        @include themify($themes) {
+            border-left: themed('border');
+        }
         padding-left: 12px;
         
         .sidebar {
@@ -750,11 +1044,15 @@ button, input {
                 width: 100%;
 
                 .side-box {
-                    background: $dark2;
+                    @include themify($themes) {
+                        background: themed('blackTwo');  
+                    }
                     padding: 16px 0 0;
                     
                     .side-box-item:hover {
-                        background: rgb(39, 41, 43);
+                        @include themify($themes) {
+                            background: themed('boxHover');  
+                        }
                     }
                 }
             }
@@ -770,7 +1068,9 @@ button, input {
     justify-content: space-between;
     gap: 12px;
     padding: 12px 16px;
-    border-bottom: $border;
+    @include themify($themes) {
+        border-bottom: themed('border');
+    }
 
     .notification-main {
         display: flex;
@@ -793,13 +1093,17 @@ button, input {
         }
 
         span {
-            color: $darkGray;
+            @include themify($themes) {
+        color: themed('grayD');  
+    }
             font-size: 14px;
         }
     }
 
     &:hover {
-        background: rgb(14, 14, 14);
+        @include themify($themes) {
+            background: themed('boxHover');  
+        }
     }
 }
 
@@ -821,7 +1125,9 @@ button, input {
 .page-description {
     display: flex;
     flex-direction: column;
-    border-bottom: $border;
+    @include themify($themes) {
+        border-bottom: themed('border');
+    }
 
     img {
         width: 100% !important;
@@ -830,6 +1136,9 @@ button, input {
 
     .page-description-content {
         padding: 32px;
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -844,11 +1153,13 @@ button, input {
 
     .show-more {
         font-size: 16px;
-        color: $blue;
+        color: $primary;
     }
 
     &:hover {
-        background: rgb(14, 14, 14);
+        @include themify($themes) {
+            background: themed('boxHover');  
+        }
     }
 
     .schema-item-details {
@@ -863,7 +1174,9 @@ button, input {
         }
 
         p {
-            color: $darkGray;
+            @include themify($themes) {
+        color: themed('grayD');  
+    }
             font-size: 15px;
         }
 
@@ -896,12 +1209,14 @@ button, input {
     }
 
     .box-more-btn svg.pinned {
-        color: $blue;
+        color: $primary;
     }
 
 }
 .two-left-one-right-schema.active {
-    background: $dark2;
+    @include themify($themes) {
+        background: themed('blackTwo');  
+    }
 
     .last-message {
         color: #fff;
@@ -910,7 +1225,7 @@ button, input {
 
 .show-more {
     font-size: 16px;
-    color: $blue;
+    color: $primary;
 }
 
 
@@ -918,7 +1233,9 @@ button, input {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    border-bottom: $border;
+    @include themify($themes) {
+        border-bottom: themed('border');
+    }
 
     .banner {
         width: 100%;
@@ -972,6 +1289,7 @@ button, input {
             span {
                 font-weight: 600;
                 font-size: 20px;
+                line-height: 22px;
             }
         }
 
@@ -983,7 +1301,9 @@ button, input {
     gap: 6px;
 
     svg, p {
-        color: $darkGray;
+        @include themify($themes) {
+        color: themed('grayD');  
+    }
     }
 }
 
@@ -997,7 +1317,9 @@ button, input {
         font-size: 14px;
 
         b {
-            color: #fff;
+            @include themify($themes) {
+                color: themed('textColor');  
+            }
         }
 
         &:hover {
@@ -1019,14 +1341,20 @@ button, input {
         padding: 16px 0;
         flex: 1;
         transition: all .2s ease;
-        color: $darkGray;
+        @include themify($themes) {
+        color: themed('grayD');  
+    }
 
         &:hover {
-            background: $dark2;
+            @include themify($themes) {
+                background: themed('blackTwo');  
+            }
         }
     }
     a.active {
-        color: #fff;
+        @include themify($themes) {
+            color: themed('textColor');  
+        }
         font-weight: 600;
         position: relative;
 
@@ -1037,7 +1365,7 @@ button, input {
             width: 30%;
             height: 4px;
             border-radius: 6px;
-            background: $blue;
+            background: $primary;
         }
     }
 }

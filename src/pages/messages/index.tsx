@@ -6,7 +6,7 @@ import Messages from 'components/messages/Messages'
 const MessagesPage: NextPage = () => {
   return (
    <Layout showSidebar={false}>
-    <div className="notifications-page">
+    <div className="two-diveded-page">
       <Messages />
       <Chat />
     </div>

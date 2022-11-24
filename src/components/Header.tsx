@@ -10,8 +10,8 @@ export default function Header() {
   return (
     <header>
       <div className="header-main">
-        <Link href="/">
-          <AiOutlineTwitter size={36} color="white" />
+        <Link href="/" className='logo'>
+          <AiOutlineTwitter size={36} />
         </Link>
         <nav className='nav-links'>
           <Link href="/" className={router.pathname === "/" ? 'active' : ''}>
@@ -70,8 +70,8 @@ export default function Header() {
             )}
             <span>Profil</span>
           </Link>
-          <Link href="/more" className={router.pathname === "/more" ? 'active' : ''}>
-            {router.pathname === "/more" ? (
+          <Link href="/settings" className={router.pathname.includes("/settings") ? 'active' : ''}>
+            {router.pathname.includes("/settings") ? (
               <HiDotsCircleHorizontal size={28} />
             ) : (
               <HiOutlineDotsCircleHorizontal size={28} />
@@ -79,7 +79,7 @@ export default function Header() {
             <span>Daha Fazla</span>
           </Link>
         </nav>
-        <button className='btn blue-btn'>Tweetle</button>
+        <button className='btn blue-btn theme-color'>Tweetle</button>
       </div>
       <button className="header-profile">
         <div className="details">

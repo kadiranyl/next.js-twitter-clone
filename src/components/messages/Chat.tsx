@@ -1,6 +1,6 @@
 export default function Chat() {
   return (
-    <div className="chat-section">
+    <div className="diveded-right">
         {true ? (
             <div className="select-message">
                 <h2>Mesaj Seç</h2>
