@@ -351,14 +351,10 @@ input[type="radio"], input[type="checkbox"] {
                 }
             }
             .action-item.blue:hover {
-                @include themify($themes) {
-                    background: themed('primarySoft');
-                }
+                background: rgba($color: $blue, $alpha: 0.2);
 
                 svg, span {
-                    @include themify($themes) {
-                        color: themed('primary');
-                    }
+                    color: $blue;
                 }
             }
 
