@@ -35,4 +35,44 @@ $themes: (
     roundedButtonHover: rgba($color: #fff, $alpha: 0.2),
     logo: rgb(214, 217, 219),
   ),
+
+
+
+  
+  blue: (
+    primary: rgb(29, 155, 240),
+    primarySoft: rgba($color: rgb(29, 155, 240), $alpha: 0.2),
+    secondary: rgb(26, 140, 216),
+    buttonTextColor: #fff,
+  ),
+  yellow: (
+    primary: #FFD400,
+    primarySoft: rgba($color: #FFD400, $alpha: 0.2),
+    secondary: rgb(230, 191, 0),
+    buttonTextColor: #2b2b2b,
+  ),
+  red: (
+    primary: #F91880,
+    primarySoft: rgba($color: #F91880, $alpha: 0.2),
+    secondary: rgb(224, 22, 115),
+    buttonTextColor: #fff,
+  ),
+  purple: (
+    primary: #7856FF,
+    primarySoft: rgba($color: #7856FF, $alpha: 0.2),
+    secondary: rgb(108, 77, 230),
+    buttonTextColor: #fff,
+  ),
+  orange: (
+    primary: #FF7A00,
+    primarySoft: rgba($color: #FF7A00, $alpha: 0.2),
+    secondary: rgb(230, 110, 0),
+    buttonTextColor: #fff,
+  ),
+  green: (
+    primary: #00BA7C,
+    primarySoft: rgba($color: #00BA7C, $alpha: 0.2),
+    secondary: rgb(0, 167, 112),
+    buttonTextColor: #fff,
+  ),
 );

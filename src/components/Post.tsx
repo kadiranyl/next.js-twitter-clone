@@ -2,9 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HiDotsHorizontal, HiOutlineChatAlt2, HiRefresh, HiOutlineRefresh, HiHeart, HiOutlineHeart, HiOutlineShare, HiChatAlt2 } from 'react-icons/hi'
 
-export default function Post({post, index}: any) {
-    console.log(post);
-    
+export default function Post({post, index}: any) {    
   return (
     <div className="post" key={index}>
         <Link href="/">

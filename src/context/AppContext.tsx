@@ -7,7 +7,8 @@ export const useApp = () => useContext(AppContext)
 
 export const AppContextProvider = ({ children }: any) => {
   
-  const [theme, setTheme] = useState()
+  const [theme, setTheme]: any = useState()
+  const [themeColor, setThemeColor]: any = useState()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -22,22 +23,31 @@ export const AppContextProvider = ({ children }: any) => {
         } else {
             setTheme(localStorage.getItem("theme"))
         }
-      }
-  }, [])
+
+        if (!localStorage.getItem("theme-color")) {
+            localStorage.setItem("theme-color", "blue")
+            setThemeColor(localStorage.getItem("theme-color"))
+        } else {
+            setThemeColor(localStorage.getItem("theme-color"))            
+        }
+    }
+  }, [typeof window])
 
   const changeTheme = (e: any) => {    
     localStorage.setItem("theme", e)
     setTheme(e)
   }
+  const changeThemeColor = (e: any) => {    
+    localStorage.setItem("theme-color", e)
+    setThemeColor(e)
+  }
 
-  useEffect(() => {
-    console.log(theme);
-    
-    document.body.className = 'theme-' + (theme == "1" ? "light" : theme == "2" ? "loess" : theme == "3" && "dark")
-  }, [theme]);
+  useEffect(() => {    
+    document.body.className = 'theme-' + (theme == "1" ? "light" : theme == "2" ? "loess" : theme == "3" && "dark") + ' theme-' + themeColor
+  }, [theme, themeColor]);
 
   return (
-    <AppContext.Provider value={{ theme, changeTheme }}>
+    <AppContext.Provider value={{ theme, changeTheme, changeThemeColor }}>
       {children}
     </AppContext.Provider>
   )

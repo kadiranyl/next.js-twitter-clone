@@ -23,9 +23,8 @@
   }
 
 
-$primary: rgb(29, 155, 240);
-$secondary: rgb(26, 140, 216);
 
+$blue: #1d9bf0;
 $yellow: #FFD400;
 $red: #F91880;
 $purple: #7856FF;
@@ -38,20 +37,21 @@ $green: #00BA7C;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Jost', sans-serif;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+      }
+      
+    &::-webkit-scrollbar-thumb {
+        @include themify($themes) {
+            background: themed('blackOne');
+        }
+    }
+    
 }
 
 body {
     overflow-y: scroll;
-}
-
-::-webkit-scrollbar {
-    width: 3px;
-  }
-  
-::-webkit-scrollbar-thumb {
-    @include themify($themes) {
-        background: themed('blackOne');
-    }
 }
 
 #__next {
@@ -141,8 +141,10 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .checkbox-label:has(input:checked) .checkmark {
-    background: $primary;
-    border-color: $primary !important;
+    @include themify($themes) {
+        background: themed('primary');
+        border-color: themed('primary') !important;
+    }
 
     svg {
         display: block;
@@ -177,12 +179,16 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .blue-btn {
-    background: $primary;
-    color: #fff;
+    @include themify($themes) {
+        background: themed('primary');
+        color: themed('buttonTextColor');
+    }
     transition: all .2s ease;
 
     &:hover {
-        background: $secondary;
+        @include themify($themes) {
+            background: themed('secondary');
+        }
     }
 }
 
@@ -230,10 +236,14 @@ input[type="radio"], input[type="checkbox"] {
     }
 
     &:hover {
-        background: rgba(29, 155, 240, 0.2);
+        @include themify($themes) {
+            background: themed('primarySoft');  
+        }
 
         svg {
-            color: $primary;
+            @include themify($themes) {
+                color: themed('primary');
+            }
         }
     }
 }
@@ -344,10 +354,14 @@ input[type="radio"], input[type="checkbox"] {
                 }
             }
             .action-item.blue:hover {
-                background: rgba($color: $primary, $alpha: 0.2);
+                @include themify($themes) {
+                    background: themed('primarySoft');
+                }
 
                 svg, span {
-                    color: $primary;
+                    @include themify($themes) {
+                        color: themed('primary');
+                    }
                 }
             }
 
@@ -402,7 +416,9 @@ input[type="radio"], input[type="checkbox"] {
         }
 
         &:focus {
-            outline: 1px solid $primary;
+            @include themify($themes) {
+                outline: 1px solid themed('primary');
+            }
             border-radius: 24px;
         }
     }
@@ -738,7 +754,9 @@ input[type="radio"], input[type="checkbox"] {
                     }
 
                     button {
-                        color: $primary;
+                        @include themify($themes) {
+                            color: themed('primary');
+                        }
                         font-size: 15px;
                         font-weight: 600;
                         cursor: pointer;
@@ -746,7 +764,9 @@ input[type="radio"], input[type="checkbox"] {
                         border-radius: 12px;
 
                         &:hover {
-                            background: rgba($color: $primary, $alpha: 0.2);
+                            @include themify($themes) {
+                                background: themed('primarySoft');
+                            }
                         }
                     }
                 }
@@ -843,7 +863,9 @@ input[type="radio"], input[type="checkbox"] {
                     right: 0;
                     height: 100%;
                     width: 2px;
-                    background: $primary;
+                    @include themify($themes) {
+                        background: themed('primary');
+                    }
                 }
             }
         }
@@ -904,13 +926,26 @@ input[type="radio"], input[type="checkbox"] {
                         display: flex;
                         align-items: center;
                         justify-content: center;
+
+                        .checkmark {
+                            border: none;
+
+                            svg {
+                                width: 36px;
+                            }
+                        }
+
                     }
 
                     .color-item.blue {
-                        background: $primary;
+                        background: $blue;
                     }
                     .color-item.yellow {
                         background: $yellow;
+                        
+                        .checkmark svg {
+                            color: #000;
+                        }
                     }
                     .color-item.red {
                         background: $red;
@@ -947,7 +982,9 @@ input[type="radio"], input[type="checkbox"] {
                         }
                     }
                     .theme-item:has(input:checked) {
-                        outline: 2px solid $primary;
+                        @include themify($themes) {
+                            outline: 2px solid themed('primary');
+                        }
                     }
 
                     .theme-item.light {
@@ -1153,7 +1190,9 @@ input[type="radio"], input[type="checkbox"] {
 
     .show-more {
         font-size: 16px;
-        color: $primary;
+        @include themify($themes) {
+            color: themed('primary');
+        }
     }
 
     &:hover {
@@ -1209,7 +1248,9 @@ input[type="radio"], input[type="checkbox"] {
     }
 
     .box-more-btn svg.pinned {
-        color: $primary;
+        @include themify($themes) {
+            color: themed('primary');
+        }
     }
 
 }
@@ -1225,7 +1266,9 @@ input[type="radio"], input[type="checkbox"] {
 
 .show-more {
     font-size: 16px;
-    color: $primary;
+    @include themify($themes) {
+        color: themed('primary');
+    }
 }
 
 
@@ -1266,17 +1309,25 @@ input[type="radio"], input[type="checkbox"] {
                 gap: 12px;
 
                 .box-more-btn {
-                    outline: 1px solid rgba($color: #fff, $alpha: 0.4);
+                    @include themify($themes) {
+                        outline: 1px solid themed('textColor');  
+                    }
 
                     svg {
-                        color: #fff;
+                        @include themify($themes) {
+                            color: themed('textColor');  
+                        }
                     }
 
                     &:hover {
-                        background: rgba($color: #fff, $alpha: 0.1);
+                        @include themify($themes) {
+                            background: themed('roundedButtonHover');  
+                        }
 
                         svg {
-                            color: #fff;
+                            @include themify($themes) {
+                                color: themed('textColor');  
+                            }
                         }
                     }
                 }
@@ -1365,7 +1416,9 @@ input[type="radio"], input[type="checkbox"] {
             width: 30%;
             height: 4px;
             border-radius: 6px;
-            background: $primary;
+            @include themify($themes) {
+                background: themed('primary');
+            }
         }
     }
 }
