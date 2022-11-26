@@ -6,7 +6,7 @@ export default function Post({post, index}: any) {
   return (
     <div className="post" key={index}>
         <Link href="/">
-        <Image src="/images/user.jpeg" width={36} height={36} alt="kadir" className='rounded' />
+        <Image src="/images/user.jpeg" width={48} height={48} alt="kadir" className='rounded' />
         </Link>
         <div className="flex-col">
         <div className="user-infos">

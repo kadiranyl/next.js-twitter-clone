@@ -4,6 +4,7 @@ import { HiOutlineCalendar, HiDotsHorizontal } from 'react-icons/hi'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { FormattedMessage } from 'react-intl'
 
 export default function ProfileLayout({children}: any) {
   const router = useRouter()
@@ -13,7 +14,7 @@ export default function ProfileLayout({children}: any) {
         <div className="title">
             <div className="flex-col">
             <h1>kadiran</h1>
-            <p>2 tweet</p>
+            <p className='lowercase'>2 <FormattedMessage id="global.tweet" /></p>
             </div>
         </div>
         <div className="profile-page">
@@ -29,7 +30,7 @@ export default function ProfileLayout({children}: any) {
                     </div>
                     {false ? (
                     <button className="small-btn outline-small">
-                        Profili düzenle
+                        <FormattedMessage id="global.edit_profile" />
                     </button>
                     ) : (
                         <div className='flex-row follow-buttons'>
@@ -37,7 +38,7 @@ export default function ProfileLayout({children}: any) {
                         <HiDotsHorizontal size={16} />
                         </button>
                         <button className="small-btn">
-                            Takip et
+                        <FormattedMessage id="global.follow" />
                         </button>
                         </div>
                     )}
@@ -58,26 +59,26 @@ export default function ProfileLayout({children}: any) {
 
                     <div className="flex-row follow-follower-count">
                         <Link href="" className="flex-row">
-                        <p><b>32</b> Takip edilen</p>
+                        <p><b>32</b> <FormattedMessage id="global.following" /></p>
                         </Link>
                         <Link href="" className="flex-row">
-                        <p><b>1</b> Takipçi</p>
+                        <p><b>1</b> <FormattedMessage id="global.follower" /></p>
                         </Link>
                     </div>
                 </div>
 
                 <div className="tabs">
                 <Link href="/profile" className={router.pathname === "/profile" ? "active" : ""}>
-                    Tweetler
+                <FormattedMessage id="global.tweets" />
                 </Link>
                 <Link href="/profile/with_replies" className={router.pathname === "/profile/with_replies" ? "active" : ""}>
-                    Tweetler ve yanıtlar
+                <FormattedMessage id="global.tweets_replies" />
                 </Link>
                 <Link href="/profile/media" className={router.pathname === "/profile/media" ? "active" : ""}>
-                    Medya
+                <FormattedMessage id="global.media" />
                 </Link>
                 <Link href="/profile/likes" className={router.pathname === "/profile/likes" ? "active" : ""}>
-                    Beğeni
+                <FormattedMessage id="global.likes" />
                 </Link>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import Post from 'components/Post'
 import Search from 'components/Search'
 import Agenda from 'components/Agenda'
 import data from '../lib/data.json'
+import { FormattedMessage } from 'react-intl'
 
 const Explore: NextPage = () => {
   
@@ -25,9 +26,9 @@ const Explore: NextPage = () => {
 
           <div className="latest-new-details">
             <div className="sub-title">
-              <p>Hava Durumu</p>
+              <p><FormattedMessage id="global.weather_forecast" /></p>
               <div className="dot"></div>
-              <p>CANLI</p>
+              <p className='uppercase'><FormattedMessage id="global.live" /></p>
             </div>
             <h2>The 2022 Atlantic hurricane season is underway</h2>
           </div>
@@ -36,7 +37,7 @@ const Explore: NextPage = () => {
         
 
         <div className="side-box">
-          <h2>İlgini çekebilecek gündemler</h2>
+          <h2><FormattedMessage id="global.trends_for_you" /></h2>
           
           {data.agendas.map((agenda: any, index: any) => (
             <Agenda agenda={agenda} key={index} />
@@ -44,7 +45,7 @@ const Explore: NextPage = () => {
 
           <Link href="/" className="side-box-item">
             <span className="show-more">
-              Daha fazla göster
+              <FormattedMessage id="global.show_more" />
             </span>
           </Link>
 

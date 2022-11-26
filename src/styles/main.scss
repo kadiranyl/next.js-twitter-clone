@@ -37,6 +37,7 @@ $green: #00BA7C;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Jost', sans-serif;
+    overflow-wrap: anywhere;
 
     &::-webkit-scrollbar {
         width: 3px;
@@ -102,6 +103,13 @@ input[type="radio"], input[type="checkbox"] {
     width: 0;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+
 .checkbox-label {
     position: relative;
     display: flex;
@@ -145,9 +153,62 @@ input[type="radio"], input[type="checkbox"] {
 
     svg {
         display: block;
+        @include themify($themes) {
+            color: themed('buttonTextColor') !important;
+        }
     }
 }
 
+.select {
+    position: relative;
+    height: 72px;
+    width: 100%;
+    padding: 6px;
+    outline: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    @include themify($themes) {
+        outline-color: themed('grayD');
+    }
+
+    .select-main {
+
+        span {
+            position: relative;
+            top: -18px;
+            font-size: 14px;
+            @include themify($themes) {
+                color: themed('grayD');
+            }
+        }
+    }
+    
+    select {
+        position: absolute;
+        background: none;
+        outline: none;
+        border: none;
+        appearance: none;
+        bottom: -22px;
+        padding: 16px;
+        top: 0;
+        left: 0;
+        right: 0;
+        @include themify($themes) {
+            color: themed('textColor');
+        }
+        font-size: 18px;
+    }
+}
+
+.theme-button {
+    @include themify($themes) {
+        background: themed('primary') !important;
+        color: themed('buttonTextColor') !important;
+    }
+}
 .rounded {
     border-radius: 99px !important;
 }
@@ -200,6 +261,7 @@ input[type="radio"], input[type="checkbox"] {
     border-radius: 16px;
     cursor: pointer;
     transition: all .2s ease;
+    font-size: 15px;
 
     &:hover {
         opacity: .9;
@@ -251,8 +313,8 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .dot {
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     @include themify($themes) {
         background: themed('grayD');  
     }
@@ -336,6 +398,16 @@ input[type="radio"], input[type="checkbox"] {
                 cursor: pointer;
                 transition: all .2s ease;
 
+                &:disabled {
+                    opacity: 0.5;
+                    pointer-events: none;
+                    cursor: none;
+
+                    &:hover {
+                        background: none !important;
+                    }
+                }
+
                 svg {
                     @include themify($themes) {
                         color: themed('grayD');
@@ -373,6 +445,63 @@ input[type="radio"], input[type="checkbox"] {
                     color: $red;
                 }
             }
+        }
+    }
+}
+
+.create-post {
+    background: none !important;
+    cursor: auto !important;
+
+    .content {
+        width: 100%;
+
+        input {
+            padding: 8px 0;
+            width: 100%;
+            font-size: 20px !important;
+            @include themify($themes) {
+                color: themed('textColor') !important;
+            }
+
+            &::placeholder {
+                @include themify($themes) {
+                    color: themed('grayD') !important;
+                }
+            }
+        }
+    }
+
+    .actions-main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+
+        .actions {
+            gap: 4px;
+            margin-top: 0;
+
+            .action-item {
+                padding: 6px;
+
+                svg {
+                    @include themify($themes) {
+                        color: themed('primary') !important;
+                    }
+                }
+
+                &:hover {
+                    @include themify($themes) {
+                        background: themed('primarySoft') !important;
+                    }
+                }
+            }
+        }
+
+        .actions-right {
+            gap: 14px;
         }
     }
 }
@@ -436,7 +565,6 @@ input[type="radio"], input[type="checkbox"] {
         justify-content: space-between;
         transition: all .2s ease;
         padding: 16px;
-        border-radius: 12px;
 
         &:hover {
             @include themify($themes) {
@@ -510,10 +638,10 @@ input[type="radio"], input[type="checkbox"] {
             a {
                 display: flex;
                 align-items: center;
-                padding: 12px 8px;
+                padding: 12px;
                 gap: 14px;
                 transition: all .2s ease;
-                border-radius: 16px;
+                border-radius: 32px;
 
                 span {
                     font-size: 18px;
@@ -755,6 +883,7 @@ input[type="radio"], input[type="checkbox"] {
                         cursor: pointer;
                         padding: 3px 12px;
                         border-radius: 12px;
+                        transition: all .2s ease;
 
                         &:hover {
                             @include themify($themes) {
@@ -777,6 +906,7 @@ input[type="radio"], input[type="checkbox"] {
                         gap: 6px;
                         flex: 1;
                         padding: 12px 16px;
+                        transition: all .2s ease;
 
                         img {
                             border-radius: 12px;
@@ -793,6 +923,10 @@ input[type="radio"], input[type="checkbox"] {
         }
                         }
                     }
+                }
+
+                .schema-item-details .user-details span {
+                    font-size: 14px;
                 }
             }
 
@@ -826,8 +960,10 @@ input[type="radio"], input[type="checkbox"] {
 
                 .search {
                     background: none;
+                    border: 1px solid;
+
                     @include themify($themes) {
-                        border: 1px solid themed('blackTwo');
+                        border-color: themed('grayD');
                     }
                 }
             }
@@ -836,6 +972,10 @@ input[type="radio"], input[type="checkbox"] {
         .diveded-left-messages {
             .two-left-one-right-schema {
                 border-radius: 0;
+
+                .user-details span {
+                    font-size: 14px;
+                }
 
                 .box-more-btn  {
                     opacity: 0;
@@ -847,18 +987,18 @@ input[type="radio"], input[type="checkbox"] {
                 }
             }
 
-            .two-left-one-right-schema.active {
-                position: relative;
+        }
+        .two-left-one-right-schema.active {
+            position: relative;
 
-                &::after {
-                    content: "";
-                    position: absolute;
-                    right: 0;
-                    height: 100%;
-                    width: 2px;
-                    @include themify($themes) {
-                        background: themed('primary');
-                    }
+            &::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                height: 100%;
+                width: 2px;
+                @include themify($themes) {
+                    background: themed('primary');
                 }
             }
         }
@@ -889,6 +1029,28 @@ input[type="radio"], input[type="checkbox"] {
             .item p.top-desc {
                 padding: 6px 16px;
                 font-size: 14px;
+            }
+
+            .select {
+                margin: 12px 0 6px 0;
+                padding: 16px 16px 8px 16px;
+            }
+
+            .language-item {
+                padding: 6px 16px;
+
+                p.top-desc {
+                    padding: 10px 0;
+                }
+            }
+            .language-item.save {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-top: 16px;
+                @include themify($themes) {
+                    border-top: themed('border');
+                }
             }
             
 
@@ -1080,7 +1242,7 @@ input[type="radio"], input[type="checkbox"] {
                     }
                     padding: 16px 0 0;
                     
-                    .side-box-item:hover {
+                    .side-box-item:hover, .two-left-one-right-schema:hover {
                         @include themify($themes) {
                             background: themed('boxHover');  
                         }
@@ -1230,7 +1392,7 @@ input[type="radio"], input[type="checkbox"] {
             align-items: center;
             gap: 6px;
 
-            span, p {
+            p {
                 font-size: 14px;
             }
         }
@@ -1255,6 +1417,40 @@ input[type="radio"], input[type="checkbox"] {
 
     .last-message {
         color: #fff;
+    }
+}
+
+.two-left-one-right-schema.settings-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    &:first-of-type {
+        margin-top: 14px;
+    }
+
+    .icon {
+        padding: 0 18px;
+    }
+
+    svg {
+        min-width: 20px;
+        @include themify($themes) {
+            color: themed('grayD');  
+        }
+    }
+
+    .flex-col {
+
+        span {
+            font-size: 15px;
+            font-weight: 500;
+        }
+    }
+
+    .last-message {
+        font-size: 13px;
     }
 }
 

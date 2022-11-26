@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {BsPinAngle, BsPinAngleFill} from 'react-icons/bs'
+import { FormattedMessage } from "react-intl";
 
 export default function ListItem({ image, name, user, pinned=null }: any) {
   return (
@@ -26,7 +27,7 @@ export default function ListItem({ image, name, user, pinned=null }: any) {
             </button>
         ) : (
         <button className='small-btn'>
-        Takip et
+        <FormattedMessage id="global.follow" />
         </button>
         )}
     </Link>

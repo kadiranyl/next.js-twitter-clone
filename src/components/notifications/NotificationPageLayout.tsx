@@ -2,6 +2,7 @@ import Layout from "components/Layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { HiOutlineFilter, HiOutlineCog } from 'react-icons/hi'
+import { FormattedMessage } from "react-intl";
 
 export default function NotificationPageLayout({children, className}: any) {
   const router = useRouter()
@@ -10,7 +11,7 @@ export default function NotificationPageLayout({children, className}: any) {
     <Layout>
       <div className="title notifications-title">
         <div className='title-top'>
-          <h1>Bildirimler</h1>
+          <h1><FormattedMessage id="page.notifications" /></h1>
           <button className="rounded">
             <HiOutlineCog size={20} />
           </button>
@@ -18,13 +19,13 @@ export default function NotificationPageLayout({children, className}: any) {
 
         <div className="tabs">
           <Link href="/notifications" className={router.pathname === "/notifications" ? "active" : ""}>
-            Tümü
+            <FormattedMessage id="global.all" />
           </Link>
           <Link href="/notifications/verified" className={router.pathname === "/notifications/verified" ? "active" : ""}>
-            Onaylanmış
+          <FormattedMessage id="page.notifications.verified" />
           </Link>
           <Link href="/notifications/mentions" className={router.pathname === "/notifications/mentions" ? "active" : ""}>
-            Bahsedenler
+          <FormattedMessage id="page.notifications.mentions" />
           </Link>
         </div>
       </div>

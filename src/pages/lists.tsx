@@ -3,16 +3,17 @@ import Layout from 'components/Layout'
 import { HiDotsHorizontal, HiOutlineDocumentAdd } from 'react-icons/hi'
 import FixedListsItem from 'components/lists/FixedListsItem'
 import Link from 'next/link'
-import Image from 'next/image'
 import ListItem from 'components/two_left_one_right_schema/ListItem'
+import { FormattedMessage } from "react-intl";
 
 const Lists: NextPage = () => {
-
   return (
    <Layout>
       <div className="title">
         <div className="flex-col">
-          <h1>Listeler</h1>
+          <h1>
+            <FormattedMessage id="page.lists" />
+          </h1>
           <p>@kadiran</p>
         </div>
         <div className="flex-row">
@@ -28,9 +29,11 @@ const Lists: NextPage = () => {
 
         <div className="lists-main">
           <div className="fixed-lists-title">
-            <h3>Sabitlenen Listeler</h3>
+            <h3>
+              <FormattedMessage id="page.lists.pinned_lists" />
+            </h3>
             <button type='button'>
-              Düzenle
+              <FormattedMessage id="global.edit" />
             </button>
           </div>
 
@@ -44,21 +47,25 @@ const Lists: NextPage = () => {
         </div>
 
         <div className="lists-main">
-          <h3>Yeni Listeleri Keşfet</h3>
+          <h3>
+            <FormattedMessage id="page.lists.explore_new_lists" />
+          </h3>
 
           <div className="explore-lists flex-col">
             <ListItem image="/images/list_item.png" name="Gözden Kaçmasın Rehberi" user={{"fullname": "Mahmut Zühde", "username": "@mamutzuhde", "avatar": "/images/user.jpeg"}} />
             <ListItem image="/images/list_item.png" name="Gözden Kaçmasın Rehberi" user={{"fullname": "Mahmut Zühde", "username": "@mamutzuhde", "avatar": "/images/user.jpeg"}} />
             <ListItem image="/images/list_item.png" name="Gözden Kaçmasın Rehberi" user={{"fullname": "Mahmut Zühde", "username": "@mamutzuhde", "avatar": "/images/user.jpeg"}} />
             <Link href="/" className="show-more">
-              Daha fazla göster
+              <FormattedMessage id="global.show_more" />
             </Link>
           </div>
 
         </div>
 
         <div className="lists-main">
-          <h3>Listelerin</h3>
+          <h3>
+            <FormattedMessage id="page.lists.your_lists" />
+          </h3>
 
           <div className="explore-lists flex-col">
             <ListItem image="/images/list_item.png" name="listem2" user={{"fullname": "Kadir Yılmaz", "username": "@kadiran", "avatar": "/images/user.jpeg"}} pinned={true} />

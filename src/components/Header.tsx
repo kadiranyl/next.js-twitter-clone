@@ -3,6 +3,7 @@ import { HiOutlineHome, HiHome, HiOutlineHashtag, HiHashtag, HiOutlineBell, HiBe
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { FormattedMessage } from "react-intl";
 
 export default function Header() {
   const router = useRouter()
@@ -20,7 +21,9 @@ export default function Header() {
             ) : (
               <HiOutlineHome size={28} />
             )}
-            <span>Ana Sayfa</span>
+            <span>
+              <FormattedMessage id="page.home" />
+            </span>
           </Link>
           <Link href="/explore" className={router.pathname === "/explore" ? 'active' : ''}>
             {router.pathname === "/explore" ? (
@@ -28,7 +31,9 @@ export default function Header() {
             ) : (
               <HiOutlineHashtag size={28} />
             )}
-            <span>Keşfet</span>
+            <span>
+              <FormattedMessage id="page.explore" />
+            </span>
           </Link>
           <Link href="/notifications" className={router.pathname.includes("/notifications") ? 'active' : ''}>
             {router.pathname.includes("/notifications") ? (
@@ -36,7 +41,9 @@ export default function Header() {
             ) : (
               <HiOutlineBell size={28} />
             )}
-            <span>Bildirimler</span>
+            <span>
+              <FormattedMessage id="page.notifications" />
+            </span>
           </Link>
           <Link href="/messages" className={router.pathname === "/messages" ? 'active' : ''}>
             {router.pathname === "/messages" ? (
@@ -44,7 +51,9 @@ export default function Header() {
             ) : (
               <HiOutlineAnnotation size={28} />
             )}
-            <span>Mesajlar</span>
+            <span>
+              <FormattedMessage id="page.messages" />
+            </span>
           </Link>
           <Link href="/bookmarks" className={router.pathname === "/bookmarks" ? 'active' : ''}>
             {router.pathname === "/bookmarks" ? (
@@ -52,7 +61,9 @@ export default function Header() {
             ) : (
               <HiOutlineBookmark size={28} />
             )}
-            <span>Yer İşaretleri</span>
+            <span>
+              <FormattedMessage id="page.bookmarks" />
+            </span>
           </Link>
           <Link href="/lists" className={router.pathname === "/lists" ? 'active' : ''}>
             {router.pathname === "/lists" ? (
@@ -60,7 +71,9 @@ export default function Header() {
             ) : (
               <HiOutlineDocumentText size={28} />
             )}
-            <span>Listeler</span>
+            <span>
+              <FormattedMessage id="page.lists" />
+            </span>
           </Link>
           <Link href="/profile" className={router.pathname.includes("/profile") ? 'active' : ''}>
             {router.pathname.includes("/profile") ? (
@@ -68,22 +81,28 @@ export default function Header() {
             ) : (
               <HiOutlineUser size={28} />
             )}
-            <span>Profil</span>
+            <span>
+              <FormattedMessage id="page.profile" />
+            </span>
           </Link>
-          <Link href="/settings" className={router.pathname.includes("/settings") ? 'active' : ''}>
+          <Link href="/settings/accessibility_display_and_languages" className={router.pathname.includes("/settings") ? 'active' : ''}>
             {router.pathname.includes("/settings") ? (
               <HiDotsCircleHorizontal size={28} />
             ) : (
               <HiOutlineDotsCircleHorizontal size={28} />
             )}
-            <span>Daha Fazla</span>
+            <span>
+              <FormattedMessage id="page.more" />
+            </span>
           </Link>
         </nav>
-        <button className='btn blue-btn theme-color'>Tweetle</button>
+        <button className='btn blue-btn theme-color'>
+          <FormattedMessage id="global.send_tweet" />
+        </button>
       </div>
       <button className="header-profile">
         <div className="details">
-          <Image src="/images/user.jpeg" width={36} height={36} alt="kadir" className='rounded' />
+          <Image src="/images/user.jpeg" width={42} height={42} alt="kadir" className='rounded' />
           <div className="flex-col">
             <span>kadiran</span>
             <p>@acatay</p>

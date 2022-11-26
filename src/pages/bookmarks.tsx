@@ -3,6 +3,7 @@ import Layout from 'components/Layout'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import Post from 'components/Post'
 import data from '../lib/data.json'
+import { FormattedMessage } from 'react-intl'
 
 const Bookmarks: NextPage = () => {
 
@@ -10,7 +11,7 @@ const Bookmarks: NextPage = () => {
    <Layout>
       <div className="title">
         <div className="flex-col">
-          <h1>Yer İşaretleri</h1>
+          <h1><FormattedMessage id="page.bookmarks" /></h1>
           <p>@kadiran</p>
         </div>
         <button className="rounded">

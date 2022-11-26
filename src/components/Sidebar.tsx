@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { useStickyBox } from "react-sticky-box";
 import Agenda from './Agenda';
 import Search from './Search';
+import { FormattedMessage } from "react-intl";
+import ListItem from './two_left_one_right_schema/ListItem';
+import UserItem from './two_left_one_right_schema/UserItem';
 
 export default function Sidebar({showSearch, showTags, showFollowRecommends, showMedia}: any) {
   const agendas = [
@@ -93,7 +96,9 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends, sho
         <div className="sidebar-main">
           {showTags && (
           <div className={"side-box" + (showSearch || showMedia ? " mt" : "")}>
-            <h2>İlgini çekebilecek gündemler</h2>
+            <h2>
+              <FormattedMessage id="global.trends_for_you" />
+            </h2>
             
             {agendas.map((agenda: any, index) => (
               <Agenda agenda={agenda} key={index} />
@@ -101,7 +106,7 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends, sho
 
             <Link href="/" className="side-box-item">
               <span className="show-more">
-                Daha fazla göster
+                <FormattedMessage id="global.show_more" />
               </span>
             </Link>
 
@@ -110,53 +115,19 @@ export default function Sidebar({showSearch, showTags, showFollowRecommends, sho
 
           {showFollowRecommends && (
           <div className={"side-box" + (showTags ? " mt" : "")}>
-            <h2>Kimi takip etmeli</h2>
-            
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details flex-row">
-                <Image src="/images/user.jpeg" width={42} height={42} alt="kadir" className='rounded' />
-                <div className="flex-col">
-                  <span>Kadir Yılmaz</span>
-                  <p>@kadiran</p>
-                </div>
-              </div>
-              <button className='small-btn'>
-                Takip et
-              </button>
-            </Link>
+            <h2>
+              <FormattedMessage id="sidebar.who_to_follow" />  
+            </h2>
 
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details flex-row">
-                <Image src="/images/user.jpeg" width={42} height={42} alt="kadir" className='rounded' />
-                <div className="flex-col">
-                  <span>Kadir Yılmaz</span>
-                  <p>@kadiran</p>
-                </div>
-              </div>
-              <button className='small-btn'>
-                Takip et
-              </button>
-            </Link>
-
-            <Link href="/" className="side-box-item">
-              <div className="box-item-details flex-row">
-                <Image src="/images/user.jpeg" width={42} height={42} alt="kadir" className='rounded' />
-                <div className="flex-col">
-                  <span>Kadir Yılmaz</span>
-                  <p>@kadiran</p>
-                </div>
-              </div>
-              <button className='small-btn'>
-                Takip et
-              </button>
-            </Link>
+            <UserItem followButton={true} image="/images/user.jpeg" user={{"fullname": "Kadir Yılmaz", "avatar": "/images/user.jpeg"}} bottomText="@kadiran" />
+            <UserItem followButton={true} image="/images/user.jpeg" user={{"fullname": "Kadir Yılmaz", "avatar": "/images/user.jpeg"}} bottomText="@kadiran" />
+            <UserItem followButton={true} image="/images/user.jpeg" user={{"fullname": "Kadir Yılmaz", "avatar": "/images/user.jpeg"}} bottomText="@kadiran" />
 
             <Link href="/" className="side-box-item">
               <span className="show-more">
-                Daha fazla göster
+                <FormattedMessage id="global.show_more" />
               </span>
             </Link>
-
           </div>
           )}
         </div>
