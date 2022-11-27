@@ -21,7 +21,7 @@ const Bookmarks: NextPage = () => {
       <div className="home-flow">
     
         {data.posts.map((post, index) => (
-          <Post post={post} key={index} />
+          <Post post={post} key={index} user={{avatar: "/images/user.jpeg", link: "/profile", name: "Kadir Yılmaz", displayName: "kadiran", following: "241", follower: "134"}} />
         ))}
 
         
