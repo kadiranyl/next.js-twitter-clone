@@ -30,7 +30,7 @@ const Display: NextPage = () => {
           <p className='top-desc'>
           <FormattedMessage id="page.settings.display_description" />
           </p>
-          <Post post={{user: "ğ", content: intl.formatMessage({ id: "page.settings.display.tweet" })}} />
+          <Post post={{content: intl.formatMessage({ id: "page.settings.display.tweet" })}} user={{avatar: "/images/user.jpeg", link: "/profile", name: "Twitter", displayName: "twitter", following: "0", follower: "0"}} />
         </div>
 
         <div className="display-item">
